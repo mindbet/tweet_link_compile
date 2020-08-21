@@ -8,13 +8,13 @@ Tweets are imported by Cron or through an admin menu link.
 
 Collected tweets are then parsed for outbound links, and those links are compiled by popularity.
 
-To keep the listing fresh, outbound links are no longer counted after a time period you set. Default is 48 hours.
+To keep the listing fresh, outbound links are no longer counted after a time period you set. Default is 30 hours.
 
 The tweet retrieval code in this module is based on Drupal module Get Tweets [https://www.drupal.org/project/get_tweets]
 
 This module can be seen in action at http://trending.health [http://trending.health]
 
-The collected tweets are saved as nodes in the Drupal database. You can set the time after which they are deleted.
+You have the option to save the collected tweets as Drupal nodes.
 
 
 Registration with Twitter:
