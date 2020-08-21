@@ -1,0 +1,61 @@
+tweet_link_compile.settings:
+  title: Tweet link compile settings
+  route_name: tweet_link_compile.settings
+  weight: 0
+  base_route: tweet_link_compile.settings
+
+tweet_link_compile.list:
+  title: List twitter user details
+  route_name: tweet_link_compile.list
+  weight: 5
+  base_route: tweet_link_compile.settings
+
+tweet_link_compile.advancedlist:
+  title: List recent collected links
+  route_name: tweet_link_compile.advancedlist
+  weight: 10
+  base_route: tweet_link_compile.settings
+
+
+
+tweet_link_compile.importusers:
+  title: Import users from Twitter
+  description: Add followings from master account.
+  route_name: tweet_link_compile.importusers
+  weight: 30
+  base_route: tweet_link_compile.settings
+
+tweet_link_compile.getfriends:
+  title: Get friends/followers
+  description: Download the friends/followers for a Twitter user.
+  route_name: tweet_link_compile.getfriends
+  weight: 40
+  base_route: tweet_link_compile.settings
+
+tweet_link_compile.post:
+  title: Post tweets
+  description: Post links and tweets.
+  route_name: tweet_link_compile.post
+  weight: 45
+  base_route: tweet_link_compile.settings
+
+tweet_link_compile.auth:
+  title: Get auth
+  description: Get users authorization.
+  route_name: tweet_link_compile.auth
+  weight: 47
+  base_route: tweet_link_compile.settings
+
+tweet_link_compile.base:
+  title: Retrieve new tweets
+  description: Collect new tweets for processing.
+  route_name: tweet_link_compile.base
+  weight: 50
+  base_route: tweet_link_compile.settings
+
+tweet_link_compile.report:
+  title: Report new links
+  description: Count most popular links.
+  route_name: tweet_link_compile.report
+  weight: 60
+  base_route: tweet_link_compile.settings

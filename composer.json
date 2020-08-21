@@ -1,0 +1,11 @@
+{
+  "name": "drupal/tweet_link_compile",
+  "type": "drupal-module",
+  "description": "Import tweets as Drupal nodes and compiles embedded links.",
+  "homepage": "http://drupal.org/project/tweet_link_compile",
+  "license": "GPL-2.0+",
+  "require": {
+    "abraham/twitteroauth": "^0.7.2"
+  },
+  "minimum-stability": "dev"
+}

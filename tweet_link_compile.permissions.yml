@@ -1,0 +1,4 @@
+administer tweet link compile settings:
+  title: 'Administer Tweet Link Compile settings'
+  description: 'A permission for tweet link compile settings.'
+  restrict access: TRUE

@@ -1,0 +1,238 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the tweet_link_compile module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Creates some default entries on this module custom table.
+ *
+ * @see hook_install()
+ *
+ * @ingroup tweet_link_compile
+ */
+function tweet_link_compile_install() {
+  // Insert some example data into our schema.
+  $entries = [
+    [
+      'lkid' => 1,
+      'twitterhandle' => 'propublica',
+      'twitterprofileimagelink' => 'https://pbs.twimg.com/profile_images/902174720040292354/rLSBbM4r_normal.jpg',
+      'linkdestination' => 'https://t.co/pxqKIsFFKQ',
+      'linktitle' => '“It’s Very Unethical”: Audio Shows Hospital Kept Vegetative Patient on Life Support to Boost Survival Rates — ProPublica',
+      'tweetid' => '1179832869629431808',
+      'timetweeted' => '1570129051',
+    ],
+    [
+      'lkid' => 2,
+      'twitterhandle' => 'statnews',
+      'twitterprofileimagelink' => 'https://pbs.twimg.com/profile_images/1051346835380400128/BltiL7OI_bigger.jpg',
+      'linkdestination' => 'https://t.co/1fswoioSu0',
+      'linktitle' => 'What one doctor thinks about drug shortages and how to solve them',
+      'tweetid' => '1180090289668657158',
+      'timetweeted' => '1570190424',
+    ],
+  ];
+
+  $connection = \Drupal::database();
+  foreach ($entries as $entry) {
+    $connection->insert('tweet_link_compile')->fields($entry)->execute();
+  }
+
+  $entries_following = [
+    [
+      'lkuid' => 1,
+      'twitterhandle' => 'propublica',
+      'lastcollectedtime' => '1577880000000',
+    ],
+    [
+      'lkuid' => 2,
+      'twitterhandle' => 'statnews',
+      'lastcollectedtime' => '1577880000000',
+    ],
+  ];
+
+  foreach ($entries_following as $entry_following) {
+    $connection->insert('tweet_link_compile_following')->fields($entry_following)->execute();
+  }
+
+}
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the database tables used by this module.
+ *
+ * @see hook_schema()
+ *
+ * @ingroup tweet_link_compile
+ */
+function tweet_link_compile_schema() {
+  $schema['tweet_link_compile'] = [
+    'description' => 'Stores extracted links.',
+    'fields' => [
+      'lkid' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary key.',
+      ],
+      'twitterhandle' => [
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Twitter handle",
+      ],
+      'twitterprofileimagelink' => [
+        'type' => 'varchar',
+        'length' => 512,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Twitter profile image",
+      ],
+      'linkdestination' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Link destination.',
+      ],
+      'linkfinaldestination' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Final link destination after redirects.',
+      ],
+      'linktitle' => [
+        'type' => 'varchar',
+        'length' => 512,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Link title.',
+      ],
+      'linktitlehash' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Link title hash.',
+      ],
+      'tweetid' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Tweet ID.',
+      ],
+      'timetweeted' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Time tweeted.',
+      ],
+    ],
+    'primary key' => ['lkid'],
+    'indexes' => [
+      'linkdestination' => ['linkdestination'],
+      'twitterhandle' => ['twitterhandle'],
+      'tweetid' => ['tweetid'],
+    ],
+  ];
+
+  $schema['tweet_link_compile_following'] = [
+    'description' => 'Stores users to follow.',
+    'fields' => [
+      'lkuid' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary key',
+      ],
+      'twitteruserid' => [
+        'type' => 'varchar',
+        'length' => 64,
+        'default' => '',
+        'description' => "Twitter userid",
+      ],
+      'twitterhandle' => [
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Twitter handle",
+      ],
+      'lastcollectedtime' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Last tweet collection time',
+      ],
+      'lasttweetid' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Most recent tweet ID.',
+      ],
+    ],
+    'primary key' => ['lkuid'],
+    'indexes' => [
+      'twitterhandle' => ['twitterhandle'],
+    ],
+  ];
+
+  $schema['tweet_link_compile_extend'] = [
+    'description' => 'Stores friends and followings.',
+    'fields' => [
+      'lkfuid' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary key',
+      ],
+      'friendtwitteruserid' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'default' => '',
+        'description' => "Twitter userid",
+      ],
+      'friendtwitterhandle' => [
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Twitter handle",
+      ],
+      'basefriendtwitteruserid' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'default' => '',
+        'description' => "Twitter userid",
+      ],
+      'basefriendtwitterhandle' => [
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Twitter handle",
+      ],
+      'relationship' => [
+        'type' => 'varchar',
+        'length' => 12,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Friend or Follower",
+      ],
+    ],
+    'primary key' => ['lkfuid'],
+    'indexes' => [
+      'friendtwitterhandle' => ['friendtwitterhandle'],
+    ],
+  ];
+
+  return $schema;
+}

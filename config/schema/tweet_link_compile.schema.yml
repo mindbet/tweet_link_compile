@@ -1,0 +1,25 @@
+tweet_link_compile.settings:
+  type: config_object
+  label: 'Tweet link compile settings'
+  mapping:
+    import:
+      type: boolean
+      label: 'Import tweets'
+    usernames:
+      type: sequence
+      label: 'Users for import'
+    count:
+      type: integer
+      label: 'Tweets count'
+    loadcount:
+      type: integer
+      label: 'User to retrieve at once'
+    expire:
+      type: integer
+      label: 'Expire date for tweets'
+    consumer_key:
+      type: string
+      label: 'OAuth Consumer key'
+    consumer_secret:
+      type: string
+      label: 'OAuth Consumer secret'

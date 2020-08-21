@@ -1,0 +1,15 @@
+<p class="site-slogan">The most-discussed stories on health care twitter today.</p>
+
+<ol>
+{% for value in myvariable %}
+  <li class="field--name-title"><a href="{{ value.mld }}">{{ value.mlt }}</a><br />
+
+  {% for innervalue in value.recommenders %}
+    <a href="https://twitter.com/{{ innervalue.iduser }}/statuses/{{ innervalue.idtweetlink }}"><img src="{{ innervalue.iduserpic }}"></a>
+  {% endfor %}
+
+
+
+  </li>
+{% endfor %}
+</ol>

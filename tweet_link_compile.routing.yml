@@ -1,0 +1,98 @@
+tweet_link_compile.settings:
+  path: '/admin/config/services/tweet_link_compile'
+  defaults:
+    _title: 'Tweet Link Compile settings'
+    _form: '\Drupal\tweet_link_compile\Form\TweetLinkCompileSettings'
+  requirements:
+    _permission: 'administer tweet link compile settings'
+  options:
+    _admin_route: true
+
+tweet_link_compile.list:
+  path: '/admin/config/services/tweet_link_compile/list'
+  defaults:
+    _title: 'List'
+    _controller: '\Drupal\tweet_link_compile\Controller\TweetLinkCompileController::entryList'
+  requirements:
+    _permission: 'administer tweet link compile settings'
+
+tweet_link_compile.advancedlist:
+  path: '/admin/config/services/tweet_link_compile/advanced-list'
+  defaults:
+    _title: 'List'
+    _controller: '\Drupal\tweet_link_compile\Controller\TweetLinkCompileController::entryAdvancedList'
+  requirements:
+    _permission: 'administer tweet link compile settings'
+
+tweet_link_compile.update:
+  path: '/admin/config/services/tweet_link_compile/update'
+  defaults:
+    _title: 'Update entry'
+    _form: '\Drupal\tweet_link_compile\Form\TweetLinkCompileUpdateForm'
+  requirements:
+    _permission: 'administer tweet link compile settings'
+
+
+tweet_link_compile.importusers:
+  path: '/admin/config/services/tweet_link_compile/importusers'
+  defaults:
+    _title: 'Import users from Twitter'
+    _controller: '\Drupal\tweet_link_compile\Controller\SyncFollowingList::importUsers'
+  requirements:
+    _permission: 'administer tweet link compile settings'
+
+tweet_link_compile.getfriends:
+  path: '/admin/config/services/tweet_link_compile/getfriends'
+  defaults:
+    _title: 'Import a users friends from Twitter'
+    _controller: '\Drupal\tweet_link_compile\Form\GetFriendsForm'
+  requirements:
+    _permission: 'administer tweet link compile settings'
+
+tweet_link_compile.post:
+  path: '/admin/config/services/tweet_link_compile/post'
+  defaults:
+    _title: 'Post a tweet'
+    _controller: '\Drupal\tweet_link_compile\Controller\PostTweets::postLink'
+  requirements:
+    _permission: 'administer tweet link compile settings'
+
+tweet_link_compile.auth:
+  path: '/admin/config/services/tweet_link_compile/auth'
+  defaults:
+    _title: 'User auth'
+    _controller: '\Drupal\tweet_link_compile\Controller\TwitterAuth::getAuth'
+  requirements:
+    _permission: 'access content'
+
+tweet_link_compile.authcallback:
+  path: '/authcallback'
+  defaults:
+    _title: 'User auth callback'
+    _controller: '\Drupal\tweet_link_compile\Controller\TwitterAuthCallback::getAuthCallback'
+  requirements:
+    _permission: 'access content'
+
+tweet_link_compile.base:
+  path: '/admin/config/services/tweet_link_compile/run'
+  defaults:
+    _title: 'Retrieve New Tweets'
+    _controller: '\Drupal\tweet_link_compile\Controller\CallTweetsService::content'
+  requirements:
+    _permission: 'administer tweet link compile settings'
+  options:
+    _admin_route: true
+
+tweet_link_compile.report:
+  path: '/tweet_link_compile_report'
+  defaults:
+    _controller: '\Drupal\tweet_link_compile\Controller\CompileMostPopular::report'
+  requirements:
+    _permission: 'access content'
+tweet_link_compile.get_myfriends_form:
+  path: '/tweet_link_compile/form/getmyfriends'
+  defaults:
+    _form: '\Drupal\tweet_link_compile\Form\GetMyFriends'
+    _title: 'GetMyFriends'
+  requirements:
+    _access: 'TRUE'

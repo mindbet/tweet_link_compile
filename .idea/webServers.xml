@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ee1bfec7-243f-46dd-9560-054f834ced00" name="mc-web" url="http://localhost:32861">
+        <fileTransfer port="0" mountedRoot="$PROJECT_DIR$/../../../../../mediacurrent_site/web" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

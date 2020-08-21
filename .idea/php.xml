@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/../../../core" />
+      <path value="$PROJECT_DIR$/../devel" />
+      <path value="$PROJECT_DIR$/../google_tag" />
+      <path value="$PROJECT_DIR$/../admin_toolbar" />
+      <path value="$PROJECT_DIR$/../responsive_favicons" />
+      <path value="$PROJECT_DIR$/../views_bulk_operations" />
+    </include_path>
+  </component>
+</project>
