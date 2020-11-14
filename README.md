@@ -12,8 +12,6 @@ To keep the listing fresh, outbound links are no longer counted after a time per
 
 The tweet retrieval code in this module is based on Drupal module Get Tweets [https://www.drupal.org/project/get_tweets]
 
-This module can be seen in action at http://trending.health [http://trending.health]
-
 You have the option to save the collected tweets as Drupal nodes.
 
 
